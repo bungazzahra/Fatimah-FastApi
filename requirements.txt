@@ -3,3 +3,4 @@ uvicorn[standard]
 typing
 pandas
 requests
+python-multipart
