@@ -198,8 +198,7 @@ def get_body():
     analisis
     
     result=analisis.to_dict('dict')
-    json_object = json.dumps(result)  
-    return json_object
+    return result
     
     
 
