@@ -1,7 +1,0 @@
-fastapi
-uvicorn[standard]
-typing
-json
-pandas
-requests
-http
