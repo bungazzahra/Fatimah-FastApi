@@ -4,7 +4,7 @@ Spyder Editor
 
 This is a temporary script file.
 """
-
+import os
 from typing import Optional
 from fastapi import FastAPI, File, UploadFile
 import json
@@ -202,9 +202,6 @@ def get_body():
     
     
 
-    return json_data[:3]
-
-
 
 
 
@@ -229,3 +226,6 @@ def create_upload_files(upload_file: UploadFile = File(...)):
 # </body>
 #     """
 #     return HTMLResponse(content=content)
+
+if __name__== "__main__":
+    uvicorn.run(app,host="0.0.0.0",port=int(os.environ.get('PORT',5000)), log_level="info")
