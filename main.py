@@ -198,7 +198,8 @@ def get_body():
     analisis
     
     result=analisis.to_dict('dict')
-    return result
+    json_object = json.dumps(result, indent = 4)  
+    return json_object
     
     
 
