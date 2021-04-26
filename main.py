@@ -19,7 +19,6 @@ from http import HTTPStatus
 
 app = FastAPI()
 
-fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
 
 
 
@@ -125,30 +124,6 @@ def read_root():
     
     return {"hero":"World"}
 
-# @app.get('/items/{items_id}')
-# def read_item(item_id:int,q:Optional[str]=None):
-#     return {"item_id":item_id, "q":q}
-
-@app.get("/items/")
-async def read_item(skip: int = 0, limit: int = 10):
-    return fake_items_db[skip : skip + limit]
-
-# @app.get("/items/{item_id}")
-# async def read_item(item_id: str, q: Optional[str] = None):
-#     if q:
-#         return {"item_id": item_id, "q": q}
-#     return {"item_id": item_id}
-
-# @app.post("/uploadcsv/")
-# def upload_csv(csv_file: UploadFile = File(...)):
-#     df = pd.read_csv(csv_file.file)
-#     # do something with dataframe here (?)
-#     return {"filename": file.filename}
-
-@app.get("/tampilangka/")
-def tampilangka():
-    a = 1+2+3
-    return {"tes":a}
 
 
 @app.get("/readapizahra")
@@ -181,7 +156,7 @@ def get_body():
         "cumulative": "cumCasesBySpecimenDate"
     }
     json_data = get_paginated_dataset(query_filters, query_structure)
-    # print(json_data[:3])
+
         # analisis
         
      #PROSES ANALISIS
@@ -203,29 +178,13 @@ def get_body():
     
 
 
-
-
 @app.post("/uploadfiles/")
 def create_upload_files(upload_file: UploadFile = File(...)):
     json_data = json.load(upload_file.file)
 #     print(upload_file.file)
     return {"data_in_file": json_data}
 
-# @app.get("/")
-# async def main():
-#     content = """
-# <body>
-# <form action="/files/" enctype="multipart/form-data" method="post">
-# <input name="files" type="file" multiple>
-# <input type="submit">
-# </form>
-# <form action="/uploadfiles/" enctype="multipart/form-data" method="post">
-# <input name="files" type="file" multiple>
-# <input type="submit">
-# </form>
-# </body>
-#     """
-#     return HTMLResponse(content=content)
+
 
 if __name__== "__main__":
     uvicorn.run(app,host="0.0.0.0",port=int(os.environ.get('PORT',5000)), log_level="info")
