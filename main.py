@@ -122,7 +122,7 @@ def get_data(url):
 @app.get('/')
 def read_root():
     
-    return {"hero":"World"}
+    return {"hello":"World"}
 
 
 
@@ -142,6 +142,24 @@ def get_body():
     result=df.to_dict('dict')
     return result
 
+@app.get("/ReadDataCorona")
+def get_body():
+    query_filters = [
+        f"areaType=region"
+    ]
+
+    query_structure = {
+        "date": "date",
+        "name": "areaName",
+        "code": "areaCode",
+        "daily": "newCasesBySpecimenDate",
+        "cumulative": "cumCasesBySpecimenDate"
+    }
+    json_data = get_paginated_dataset(query_filters, query_structure)
+    json_data=json_data[:200]
+    return json_data
+
+
 @app.get("/JumlahCoronaCasesbyMonth")
 def get_body():
     query_filters = [
@@ -157,8 +175,7 @@ def get_body():
     }
     json_data = get_paginated_dataset(query_filters, query_structure)
 
-        # analisis
-        
+
      #PROSES ANALISIS
 
     df=pd.json_normalize(json_data)
